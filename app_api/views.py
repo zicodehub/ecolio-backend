@@ -1,0 +1,65 @@
+from django.shortcuts import render
+
+from .models import Post, Test1, Test2
+from .serializers import PostSerializer, T1Serializer, T2Serializer
+from .serializers import PostSerializer, UserSerializer, GroupSerializer
+
+from django.contrib.auth.models import User, Group
+from rest_framework import (
+    viewsets,
+    generics,
+    permissions,
+    response,
+    status
+)
+# from django_filters import rest_framework as filters
+from django_filters.rest_framework import DjangoFilterBackend
+from durin.models import Client
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    # filterset_fields = ('id', )
+    # filter_backends = [ DjangoFilterBackend ]
+    # filterset_fields = '__all__'
+
+    def create(self, request, **kw) :
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            Client(name= request.data.get("username")).save() 
+            # serializer.data[""]
+            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
+        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [ DjangoFilterBackend ]
+    filterset_fields = '__all__'
+
+class PostList(generics.ListCreateAPIView) :
+    queryset = Post.postobjects.all()
+    serializer_class = PostSerializer
+    # permission_classes = [permissions.IsAuthenticated]
+
+
+class PostDetail(generics.RetrieveDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+class T1ViewSet(generics.ListCreateAPIView):
+    queryset = Test1.objects.all()
+    serializer_class = T1Serializer
+
+class T2ViewSet(generics.ListCreateAPIView):
+    queryset = Test2.objects.all()
+    serializer_class = T2Serializer

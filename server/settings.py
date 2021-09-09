@@ -156,25 +156,25 @@ WSGI_APPLICATION = 'server.wsgi.application'
 #     },
 # }
 
-SUPER_USER_DATABASE = {
-    'alias': 'SUPER_USER_DB', 
-    'conf': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cfsgejkx',
-        'USER': 'cfsgejkx',
-        'PASSWORD': 'Y5JrtpAxob0FUnzxzmA62M82qzyG38fj',
-        'HOST': 'chunee.db.elephantsql.com',
-        'PORT': ''
-    },
-    # 'conf': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #    'NAME': 'tir',
-    #    'USER': 'postgres',
-    #    'PASSWORD': 'root',
-    #    'HOST': 'localhost',
-    #    'PORT': ''
-    # },
-}
+# SUPER_USER_DATABASE = {
+#     'alias': 'SUPER_USER_DB', 
+#     'conf': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cfsgejkx',
+#         'USER': 'cfsgejkx',
+#         'PASSWORD': 'Y5JrtpAxob0FUnzxzmA62M82qzyG38fj',
+#         'HOST': 'chunee.db.elephantsql.com',
+#         'PORT': ''
+#     },
+#     # 'conf': {
+#     #     'ENGINE': 'django.db.backends.postgresql',
+#     #    'NAME': 'tir',
+#     #    'USER': 'postgres',
+#     #    'PASSWORD': 'root',
+#     #    'HOST': 'localhost',
+#     #    'PORT': ''
+#     # },
+# }
 
 DATABASES = {
     'default': {

@@ -69,7 +69,7 @@ class ClientDatabaseRouterMiddleware(MiddlewareMixin):
 		"""
 		print(request.headers)
 		print(request.body)
-		db_alias = request.headers.get(settings.DATABASE_HEADER_ROUTER_NAME, None)
+		db_alias = request.headers.get(settings.CORE_CONFIGS['DATABASE_HEADER_ROUTER_NAME'], None)
 
 		if db_alias :
 			# Si la requete possède l'indice dans le HEADER
@@ -96,13 +96,16 @@ class ClientDatabaseRouterMiddleware(MiddlewareMixin):
 					dico = eval(request.body.decode())
 					if not isinstance(dico, dict) :
 						return JsonResponse({'detail': 'Corpus incorrect'}, status= 400)
-					brute_alias = dico.get(settings.DATABASE_LOGIN_ROUTER_NAME, None)
-					
+					brute_alias = dico.get(settings.CORE_CONFIGS['DATABASE_LOGIN_ROUTER_NAME'], None)
+					print("tried to get")
+
 					if not brute_alias :
 						return JsonResponse({'detail': 'Code manquant'}, status= 400)
 					else: 
 						try :
+							print("try to DBRM")
 							client = DATABASE_ROUTER_MODEL.objects.get(code= brute_alias)
+							print("OKOKLLLL")
 							set_db_alias_from_request(client.db_alias)
 						except:
 							return JsonResponse({'detail': 'Code incorrect'}, status= 400)
@@ -113,14 +116,9 @@ class ClientDatabaseRouterMiddleware(MiddlewareMixin):
 
 	def is_exception(self, request) :
 		path = request.get_full_path()
-		if (path.endswith('login') or path.endswith('login/') ) and request.method == "POST" :
-			return True
-		if (path.endswith('createschool') or path.endswith('createschool/') ) and request.method == "POST" :
+		if path.endswith('login/')  and request.method == "POST" :
 			return True
 		return False
 
 	def process_template_response(self, request, response) :
-		# response.headers["Access-Control-Allow-Headers"] = "x-code"
-		print(response.headers, dir(response.headers))
-		print("OKOKOKOKOK")
 		return response

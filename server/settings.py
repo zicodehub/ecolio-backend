@@ -244,27 +244,30 @@ REST_DURIN = {
 
 
 ################## CORE APP CONFIGURATIONS ###########################################################
+CORE_CONFIGS = {
+    # """
+    #     DATABASE_HEADER_ROUTER_NAME représente le champ du header des requêtes HTTP, 
+    #     utilisé par l'application --core  pour router la requête dans la  bonne base de données
+    # """
+    'DATABASE_HEADER_ROUTER_NAME' : "X-Code",
+    'DATABASE_LOGIN_ROUTER_NAME' : "code",
 
-"""
-    DATABASE_HEADER_ROUTER_NAME représente le champ du header des requêtes HTTP, 
-    utilisé par l'application --core  pour router la requête dans la  bonne base de données
-"""
-DATABASE_HEADER_ROUTER_NAME = "X-Code"
-DATABASE_LOGIN_ROUTER_NAME = "code"
+    # """ 
+    #     Utilisé par get_db_alias_from_request() de core.utils
+    #     Un client durant tout le traitement d'une requete, les opérations en DB
+    #     sont routées grace à une variable définie dans le thread de la requete.
 
-""" 
-    Utilisé par get_db_alias_from_request() de core.utils
-    Un client durant tout le traitement d'une requete, les opérations en DB
-    sont routées grace à une variable définie dans le thread de la requete.
+    #     DATABASE_ALIAS_NAME_FROM_REQUEST indique le nom de cette variable
+    # """
+    'DATABASE_ALIAS_NAME_FROM_REQUEST' : 'db-alias',
 
-    DATABASE_ALIAS_NAME_FROM_REQUEST indique le nom de cette variable
-"""
-DATABASE_ALIAS_NAME_FROM_REQUEST = 'db-alias'
+    # """ 
+    #     Model/Table de routage des requetes HTTP
+    # """
+    'DATABASE_ROUTER_MODEL' : "core.ClientDB",
 
-""" 
-    Model/Table de routage des requetes HTTP
-"""
-DATABASE_ROUTER_MODEL = "core.ClientDB"
+}
+
 
 ##  ATTENTION, L'ORDRE EST TRES IMPORTANT
 DATABASE_ROUTERS = [

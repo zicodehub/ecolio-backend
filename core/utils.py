@@ -1,31 +1,34 @@
 from threadlocals.threadlocals import set_request_variable, get_request_variable
 from django.apps import apps as django_apps
 
+from server.settings import CORE_CONFIGS
 from django.conf import settings
-from django.db import connections
+from django.db import connections, connection
 from django.core import management
 
-from server.settings import DATABASE_ROUTER_MODEL
+# from server.settings import CORE_CONFIGS
+
+# DATABASE_ROUTER_MODEL = CORE_CONFIGS.get("DATABASE_ROUTER_MODEL")
 
 
 def get_dbrm() :
-	return django_apps.get_model(settings.DATABASE_ROUTER_MODEL)	
+	return django_apps.get_model(CORE_CONFIGS['DATABASE_ROUTER_MODEL'])	
 
 def get_client_db(filters) :
 	DBR = get_dbrm()
 	try :
 		return DBR.objects.get(
-			code= filters.get(settings.DATABASE_LOGIN_ROUTER_NAME, False), 
+			code= filters.get(CORE_CONFIGS['DATABASE_LOGIN_ROUTER_NAME'], False), 
 			is_active= True
 		)
 	except:
 		return False
 
 def get_db_alias_from_request():
-	return get_request_variable(settings.DATABASE_ALIAS_NAME_FROM_REQUEST)
+	return get_request_variable(CORE_CONFIGS['DATABASE_ALIAS_NAME_FROM_REQUEST'])
 
 def set_db_alias_from_request(value):
-	set_request_variable(settings.DATABASE_ALIAS_NAME_FROM_REQUEST, value)
+	set_request_variable(CORE_CONFIGS['DATABASE_ALIAS_NAME_FROM_REQUEST'], value)
 
 def create_database(db_name):
 	""" 
@@ -42,7 +45,7 @@ def create_database(db_name):
 	try :
 		cursor = connection.cursor()
 	except:
-		cursor = connections.all()[1].cursor()
+		cursor = connections.all()[1].cursor() # Celui du gateway
 
 	cursor.execute(f"CREATE DATABASE {db_name}")
 	cursor.close()

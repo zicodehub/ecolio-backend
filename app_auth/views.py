@@ -26,7 +26,7 @@ class Login(LoginView) :
 
 		
 		# data["X-Code"] = get_db_alias_from_request()
-		data[settings.DATABASE_HEADER_ROUTER_NAME] = client_db.db_alias
+		data[settings.CORE_CONFIGS['DATABASE_HEADER_ROUTER_NAME']] = client_db.db_alias
 		return Response(data)
 		# return super().post(request, *args, **kwargs)
 

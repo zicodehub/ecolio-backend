@@ -10,14 +10,12 @@ class GatewayRouter :
     """
     def db_for_read(self, model, **hints):
         if model._meta.app_label == "core" :
-            print(f"\n\n READ_gateway gateway  -- model: {model}")
             return "gateway"
 
         return None
 
     def db_for_write(self, model, **hints):
         if model._meta.app_label == "core" :
-            print(f"\n\n WRITE_gateway gateway -- model: {model}")
             return "gateway"
 
         return None
@@ -29,13 +27,10 @@ class GatewayRouter :
         """
         Les models de l'application --core ne sont migrés que dans BD du GATEWAY
         """
-        print(f"requesting migration --db: {db} --app_label: {app_label} -- model: {model_name} ")
         if db == 'gateway' :
             if app_label not in ('core', 'contenttypes') :
-                print(f"   refusé  ")
                 return False
             else :
-                print("     accordé")
                 return True
         return None
 
@@ -52,7 +47,6 @@ class RuntimeRouter:
 
         # --choice-- a une valeur ou est --None--
         choice = get_db_alias_from_request() 
-        print(f"\n\n READ_runtime {choice} ")
         return choice
 
     def db_for_write(self, model, **hints):
@@ -61,7 +55,6 @@ class RuntimeRouter:
         """
         # --choice-- a une valeur ou est --None--
         choice = get_db_alias_from_request() 
-        print(f"\n\n WRITE_runtime {choice} ")
         return choice
 
 
@@ -118,6 +111,7 @@ class TIRRouter:
         'auth_db' database.
         """
         if app_label in settings.PRIVATE_APPS :
+            print("POTENTIELLE ERREUR")
             if db != settings.SUPER_USER_DATABASE.get('alias') :
                 print("MIGRATION RESTREINTE")
                 return False

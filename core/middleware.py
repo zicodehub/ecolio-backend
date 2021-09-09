@@ -58,34 +58,9 @@ class ClientDatabaseRouterMiddleware(MiddlewareMixin):
 			Ainsi, les Super Admin peuvent aussi utiliser ce gateway
 		"""
 
-		# To be deleted
-		try :
-			db_su = settings.SUPER_USER_DATABASE
-			db_conf = db_su.get('conf')
-			DATABASE_ROUTER_MODEL.objects.get_or_create(
-				db_name= db_conf.get('NAME'),
-				db_host= db_conf.get('HOST'),
-				db_user= db_conf.get('USER'),
-				db_password= db_conf.get('PASSWORD'),
-				code= db_su.get('alias'), 
-				is_active= True
-			)
-
-		except :
-			pass
-
 		# Mandatory
 		refresh_databases()
 
-		# To be deleted
-		try :
-			create_superuser(
-				db_su.get('alias'), 
-				first_user= True 
-			)
-		except :
-			pass
-			
 		print("Middleware excécuté")
 
 	def  process_view(self, request, view_func, view_args, view_kwargs):

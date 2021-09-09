@@ -134,47 +134,10 @@ WSGI_APPLICATION = 'server.wsgi.application'
     il doit TOUJOURS y avoir une base de donnée active en plus de la --default--
     Cela est dû à la fonction --create_database() de --core.utils qui utilise leur curseur
 
-    Si la SUPER_USER_DATABASE et la DB du GATEWAY sont les mêmes, 
-    il faudra quand même définir les 2 avec les mêmes configurations 
 
-
-
-    SUPER_USER_DATABASE est obligatoire si l'application --core est installée
-    Il est recommandé que ce soit une sqlite3 car est beaucoup sollicitée
-    et n'est censée dépasser le million de lignes
 """
 
-# SUPER_USER_DATABASE = {
-#     'alias': 'SUPER_USER_DB', 
-#     'conf': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'tir',
-#         'USER': 'postgres',
-#         'PASSWORD': 'root',
-#         'HOST': 'localhost',
-#         'PORT': ''
-#     },
-# }
 
-# SUPER_USER_DATABASE = {
-#     'alias': 'SUPER_USER_DB', 
-#     'conf': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'cfsgejkx',
-#         'USER': 'cfsgejkx',
-#         'PASSWORD': 'Y5JrtpAxob0FUnzxzmA62M82qzyG38fj',
-#         'HOST': 'chunee.db.elephantsql.com',
-#         'PORT': ''
-#     },
-#     # 'conf': {
-#     #     'ENGINE': 'django.db.backends.postgresql',
-#     #    'NAME': 'tir',
-#     #    'USER': 'postgres',
-#     #    'PASSWORD': 'root',
-#     #    'HOST': 'localhost',
-#     #    'PORT': ''
-#     # },
-# }
 
 DATABASES = {
     'default': {
@@ -201,7 +164,6 @@ DATABASES = {
     #    'PORT': ''
     # },
     
-    SUPER_USER_DATABASE["alias"] : SUPER_USER_DATABASE["conf"]
    
 }
 

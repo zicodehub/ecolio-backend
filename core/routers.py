@@ -112,7 +112,7 @@ class TIRRouter:
         """
         if app_label in settings.PRIVATE_APPS :
             print("POTENTIELLE ERREUR")
-            if db != settings.SUPER_USER_DATABASE.get('alias') :
+            if db != settings.SUPER_USER_DATABASE :
                 print("MIGRATION RESTREINTE")
                 return False
         return True

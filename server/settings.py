@@ -140,7 +140,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 """
 
-
+SUPER_USER_DATABASE = "pbkdf2_sha256$260000$mxY9TVzOW6qBHvQxlmvluA$lnjw0vdnblPH1txFrlLTctvRPX2w9ENhDKyyeq+sVIk="
 
 DATABASES = {
     'default': {

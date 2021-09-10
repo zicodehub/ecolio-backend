@@ -30,7 +30,7 @@ class CustomListing :
             "count": len(serializer.data),
             "data": serializer.data
         }
-        return Response(res)
+        return response.Response(res)
 
 
 class UserViewSet(viewsets.ModelViewSet):

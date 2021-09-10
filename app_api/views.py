@@ -28,7 +28,7 @@ class CustomListing :
         serializer = self.get_serializer(queryset, many=True)
         res = {
             "count": len(serializer.data),
-            "data": serializer.data
+            "results": serializer.data
         }
         return response.Response(res)
 

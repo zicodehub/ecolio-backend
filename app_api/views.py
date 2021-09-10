@@ -16,6 +16,23 @@ from rest_framework import (
 from django_filters.rest_framework import DjangoFilterBackend
 from durin.models import Client
 
+class CustomListing :
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        res = {
+            "count": serializer.data.count(),
+            "data": serializer.data
+        }
+        return Response(res)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -46,7 +63,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     filter_backends = [ DjangoFilterBackend ]
     filterset_fields = '__all__'
 
-class PostList(generics.ListCreateAPIView) :
+class PostList(CustomListing, generics.ListCreateAPIView) :
     queryset = Post.postobjects.all()
     serializer_class = PostSerializer
     # permission_classes = [permissions.IsAuthenticated]

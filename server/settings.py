@@ -148,23 +148,23 @@ DATABASES = {
     },
 
 
-	# 'gateway': {
- #        'ENGINE': 'django.db.backends.postgresql',
- #        'NAME': 'kfogrrvg',
- #        'USER': 'kfogrrvg',
- #        'PASSWORD': 'Dy7ZKa3Hh9mbud5Jcge4bf5-HwbpD8e_',
- #        'HOST': 'lallah.db.elephantsql.com',
- #        'PORT': ''
- #    },
-
-    'gateway': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'gateway',
-       'USER': 'postgres',
-       'PASSWORD': 'root',
-       'HOST': 'localhost',
-       'PORT': ''
+	'gateway': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'kfogrrvg',
+        'USER': 'kfogrrvg',
+        'PASSWORD': 'Dy7ZKa3Hh9mbud5Jcge4bf5-HwbpD8e_',
+        'HOST': 'lallah.db.elephantsql.com',
+        'PORT': ''
     },
+
+    # 'gateway': {
+    #    'ENGINE': 'django.db.backends.postgresql',
+    #    'NAME': 'gateway',
+    #    'USER': 'postgres',
+    #    'PASSWORD': 'root',
+    #    'HOST': 'localhost',
+    #    'PORT': ''
+    # },
     
    
 }

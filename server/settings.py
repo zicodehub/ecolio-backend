@@ -95,7 +95,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-ALLOWED_HOSTS=[ '*' ]
+ALLOWED_HOSTS=[ 
+    '*'
+]
+
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:3000",
 #     "http://127.0.0.1:3000",
@@ -103,10 +106,6 @@ ALLOWED_HOSTS=[ '*' ]
 
 
 
-# CORS_ALLOW_HEADERS = [
-#     "x-code",
-    
-# ]
 ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
@@ -149,23 +148,23 @@ DATABASES = {
     },
 
 
-	'gateway': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kfogrrvg',
-        'USER': 'kfogrrvg',
-        'PASSWORD': 'Dy7ZKa3Hh9mbud5Jcge4bf5-HwbpD8e_',
-        'HOST': 'lallah.db.elephantsql.com',
-        'PORT': ''
-    },
+	# 'gateway': {
+ #        'ENGINE': 'django.db.backends.postgresql',
+ #        'NAME': 'kfogrrvg',
+ #        'USER': 'kfogrrvg',
+ #        'PASSWORD': 'Dy7ZKa3Hh9mbud5Jcge4bf5-HwbpD8e_',
+ #        'HOST': 'lallah.db.elephantsql.com',
+ #        'PORT': ''
+ #    },
 
-    #'gateway': {
-    #    'ENGINE': 'django.db.backends.postgresql',
-    #    'NAME': 'gateway',
-    #    'USER': 'postgres',
-    #    'PASSWORD': 'root',
-    #    'HOST': 'localhost',
-    #    'PORT': ''
-    # },
+    'gateway': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'gateway',
+       'USER': 'postgres',
+       'PASSWORD': 'root',
+       'HOST': 'localhost',
+       'PORT': ''
+    },
     
    
 }

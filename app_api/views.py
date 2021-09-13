@@ -13,7 +13,7 @@ from rest_framework import (
     status
 )
 # from django_filters import rest_framework as filters
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend, OrderingFilter
 from durin.models import Client
 
 class CustomListing :
@@ -39,7 +39,7 @@ class UserViewSet(CustomListing, generics.ListCreateAPIView):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    filter_backends = [ DjangoFilterBackend ]
+    filter_backends = [ DjangoFilterBackend, OrderingFilter ]
     filterset_fields = ('id', )
     ordering_fields = ['username', 'email']
     # filterset_fields = '__all__'

@@ -33,7 +33,7 @@ class CustomListing :
         return response.Response(res)
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(CustomListing, generics.ListCreateAPIView):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -51,6 +51,10 @@ class UserViewSet(viewsets.ModelViewSet):
             # serializer.data[""]
             return response.Response(serializer.data, status=status.HTTP_201_CREATED)
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):

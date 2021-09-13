@@ -158,6 +158,7 @@ DATABASES = {
         'HOST': 'lallah.db.elephantsql.com',
         'PORT': ''
     },
+    
 
     # 'gateway': {
     #    'ENGINE': 'django.db.backends.postgresql',

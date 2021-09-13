@@ -39,8 +39,8 @@ class UserViewSet(CustomListing, generics.ListCreateAPIView):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    # filterset_fields = ('id', )
-    # filter_backends = [ DjangoFilterBackend ]
+    filterset_fields = ('id', )
+    filter_backends = [ DjangoFilterBackend ]
     # filterset_fields = '__all__'
 
     def create(self, request, **kw) :
